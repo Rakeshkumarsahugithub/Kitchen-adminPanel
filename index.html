@@ -29,6 +29,10 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            height: 60px; /* Fixed height for header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         header h1 {
@@ -36,13 +40,34 @@
             margin: 0;
         }
 
+        .toggle-menu {
+            position: absolute;
+            
+            left: 2px;
+            background-color: #f25b15;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 5px;
+            z-index: 1000;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em; /* Default font size for toggle button */
+        }
+
+        .toggle-menu:hover {
+            background-color: #fb8c00;
+            transform: scale(1.05);
+        }
+
         nav {
             background: linear-gradient(to right, rgb(238, 75, 26), blue);
             color: white;
             width: 250px;
-            height: calc(100vh - 50px);
+            height: calc(100vh - 60px); /* Adjusted for header height */
             position: fixed;
-            top: 50px;
+            top: 60px; /* Adjusted for header height */
             left: -250px;
             transition: left 0.3s;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -64,31 +89,11 @@
 
         .main {
             margin-left: 0;
-            padding: 70px 20px 20px;
+            padding: 80px 20px 20px; /* Adjusted for header height */
             flex: 1;
             display: flex;
             flex-direction: column;
             transition: margin-left 0.3s;
-        }
-
-        .toggle-menu {
-            position: absolute;
-            top: 1px;
-            left: 2px;
-            background-color: #f25b15;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 12px 18px;
-            border-radius: 5px;
-            z-index: 1000;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .toggle-menu:hover {
-            background-color: #fb8c00;
-            transform: scale(1.05);
         }
 
         .container {
@@ -114,26 +119,39 @@
         }
 
         @media (max-width: 768px) {
+            header {
+                height: 50px; /* Smaller height for mobile */
+            }
+
+            header h1 {
+                font-size: 1.2em; /* Smaller font size for mobile */
+            }
+
+            .toggle-menu {
+                padding: 8px 12px; /* Smaller padding for mobile */
+                font-size: 1em; /* Smaller font size for mobile */
+                
+                left: 1px;
+            }
+
             nav {
                 width: 100%;
                 left: -100%;
+                height: calc(100vh - 50px); /* Adjusted for smaller header height */
+                top: 50px; /* Adjusted for smaller header height */
             }
 
             nav.active {
                 left: 0;
             }
 
-            .toggle-menu {
-                top: 10px;
+            .main {
+                padding: 70px 10px 10px; /* Adjusted for smaller header height */
             }
 
             .card {
                 flex: 1 1 100%;
                 margin: 10px 0;
-            }
-
-            .main {
-                padding: 70px 10px 10px;
             }
         }
     </style>
@@ -304,7 +322,7 @@
             }
         }
 
-        // Show Section Functionalities
+        // Show Section Functionality
         function showSection(sectionId) {
             document.getElementById('welcome').style.display = 'none';
             const sections = ['user-management', 'product-management', 'order-management'];
